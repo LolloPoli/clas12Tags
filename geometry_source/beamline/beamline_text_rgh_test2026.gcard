@@ -1,0 +1,23 @@
+<gcard>
+
+    <option name="geometry" value="800x600"/>
+
+    <detector name="../targets/target" factory="TEXT" variation="transverse"/>
+    <detector name="../targets/cad_transverse/"                      factory="CAD"/>
+    <!-- <detector name="cad/"                      factory="CAD"  variation="rgh_test2026"/> -->
+    <detector name="beamline" factory="TEXT" variation="rgh_test2026"/>
+    <!-- <detector name="../../experiments/clas12/beamline/beamline" factory="TEXT" variation="TransverseUpstreamBeampipe"/> -->
+
+    <option name="HALL_FIELD" value="Full_transsolenoid_x321_y161_z321_April2024:Symm_torus_r2501_phi16_z251_24Apr2018"/>
+
+    <option name="BEAM_P" value="e-, 10.6*GeV, 0*deg, 0*deg"/>
+	<option name="SPREAD_P" value="0.0*GeV, 0*deg, 180*deg"/>
+
+    <!-- <option name="CHECK_OVERLAPS" value="1"/> -->
+
+    <option name="OUTPUT" value="hipo, out.hipo"/>
+    <option name="PHYSICS" value="STD + FTFP_BERT"/>
+    <option name="RUNNO" value="11"/>
+    <option name="DIGITIZATION_VARIATION" value="default"/>
+
+</gcard>
