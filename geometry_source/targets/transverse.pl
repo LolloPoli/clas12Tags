@@ -26,7 +26,7 @@ sub build_transverse {
 
     # cell frame
     $detector{"name"} = "ttargetCellFrame";
-    $detector{"mother"} = "root";
+    $detector{"mother"} = "cryocan";
     $detector{"description"} = "Target Container";
     $detector{"color"} = "222222";
     $detector{"type"} = "Tube";
@@ -38,7 +38,7 @@ sub build_transverse {
     # cell
     %detector = init_det();
     $detector{"name"} = "ttargetCell";
-    $detector{"mother"} = "root";
+    $detector{"mother"} = "cryocan";
     $detector{"description"} = "Target Container";
     $detector{"color"} = "994422";
     $detector{"type"} = "Tube";
@@ -51,7 +51,7 @@ sub build_transverse {
     my $zpos = $ttlength + $ttfoil;
     %detector = init_det();
     $detector{"name"} = "al_window_entrance";
-    $detector{"mother"} = "root";
+    $detector{"mother"} = "cryocan";
     $detector{"description"} = "25 mm thick aluminum window upstream";
     $detector{"color"} = "aaaaff";
     $detector{"type"} = "Tube";
@@ -65,7 +65,7 @@ sub build_transverse {
     $zpos = -$ttlength - $ttfoil;
     %detector = init_det();
     $detector{"name"} = "al_window_exit";
-    $detector{"mother"} = "root";
+    $detector{"mother"} = "cryocan";
     $detector{"description"} = "25 mm thick aluminum window upstream";
     $detector{"color"} = "aaaaff";
     $detector{"type"} = "Tube";
