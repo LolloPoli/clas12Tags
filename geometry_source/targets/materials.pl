@@ -23,6 +23,9 @@ sub build_materials {
     elsif ($configuration_string eq "rgm_fall2021_Ar") {
         build_lAr_mats();
     }
+    elsif ($configuration_string eq "rgh") {
+        build_rgh_target_materials();
+    }
 
 
     # common to all

@@ -14,38 +14,6 @@ sub updated_rghline() {
     # not running volumes that are currently malformed because hdice geometry is not yet implemented correctly
     my %detector = init_det();
 
-    if (0 == 1) {
-
-        $detector{"name"} = "vacuumPipe1_1";
-        $detector{"mother"} = "hdIce_mother";
-        $detector{"description"} = "straightVacuumPipe 2.75 inch OD 0.065 thick ";
-        $detector{"color"} = "aaffff";
-        $detector{"type"} = "Tube";
-        $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-        $detector{"dimensions"} = "$firstVacuumIR*mm $firstVacuumOR*mm $pipeLength*mm 0*deg 360*deg";
-        $detector{"material"} = "G4_STAINLESS-STEEL";
-        $detector{"style"} = 1;
-        print_det(\%configuration, \%detector);
-
-        $zpos = 0;
-        $pipeLength = 72.5;
-        $firstVacuumIR = 0;
-        $firstVacuumOR = 33.325;
-
-        %detector = init_det();
-        $detector{"name"} = "vacuumInPipe1_1";
-        $detector{"mother"} = "vacuumPipe1_1";
-        $detector{"description"} = "straightVacuumPipe";
-        $detector{"color"} = "000000";
-        $detector{"type"} = "Tube";
-        $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-        $detector{"dimensions"} = "$firstVacuumIR*mm $firstVacuumOR*mm $pipeLength*mm 0*deg 360*deg";
-        $detector{"material"} = "G4_Galactic";
-        $detector{"style"} = 1;
-        print_det(\%configuration, \%detector);
-
-    }
-
     $pipeLength = 812.695;
     $zpos = 1600.105;
     $firstVacuumIR = 33.275;
@@ -141,38 +109,6 @@ sub updated_rghline() {
     print_det(\%configuration, \%detector);
 
 
-    if (0 == 1){ #old vacuum line, to be removed after checking the new one
-        my $torusStart = 2754.17;
-        my $mediumPipeEnd = 5006; # added by hand by shooting geantino vertically to locate the point
-        my $bigPipeBegins = 5062; # added by hand by shooting geantino vertically to locate the point. Corrected by 1mm to match the CAD import of downstream beamline
-        my $connectThickness = 7; # added by hand by shooting geantino vertically to locate the point. Corrected by 1mm to match the CAD import of downstream beamline
-        my $pipeEnds = 5732;
-
-        my $nplanes = 7;
-
-        # vacuum inside torus. To be extended upstream
-        # the end of the line coordinate is eyeballed
-        # b
-        my @iradius_vbeam = (33.274, 33.274, 32.2, 32.2, 59.8, 59.8, 63.7);
-        my @z_plane_vbeam = ($torusStart, $mediumPipeEnd, $mediumPipeEnd, $mediumPipeEnd + $connectThickness, $bigPipeBegins, $pipeEnds, 13900);
-
-        %detector = init_det();
-        $detector{"name"} = "beam_vacuum";
-        $detector{"mother"} = "root";
-        $detector{"description"} = "vacuum line inside torus";
-        $detector{"color"} = "119999";
-        $detector{"type"} = "Polycone";
-        my $dimen = "0.0*deg 360*deg $nplanes*counts";
-        for (my $i = 0; $i < $nplanes; $i++) {$dimen = $dimen . " 0.0*mm";}
-        for (my $i = 0; $i < $nplanes; $i++) {$dimen = $dimen . " $iradius_vbeam[$i]*mm";}
-        for (my $i = 0; $i < $nplanes; $i++) {$dimen = $dimen . " $z_plane_vbeam[$i]*mm";}
-        $detector{"dimensions"} = $dimen;
-        $detector{"material"} = "G4_Galactic";
-        $detector{"style"} = 1;
-        print_det(\%configuration, \%detector);
-    }
-
-
     # new vacuum line
     my $nplanes = 7;
     my @iradius_pipe = (33.275, 33.275, 60.325, 60.325, 64.0, 64.0, 64.0);
@@ -199,13 +135,13 @@ sub updated_rghline() {
 
     # VACUUM INSIDE PIPE 1
     my @iradius_vac = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-    my @oradius_vac = (33.274, 33.274, 60.324, 60.324, 63.99, 63.99, 63.99);
+    my @oradius_vac = (33.264, 33.264, 60.314, 60.314, 63.98, 63.98, 63.98);
 
     %detector = init_det();
     $detector{"name"} = "vacuumInPipe";
     $detector{"mother"} = "vacuumPipe";
     $detector{"description"} = "vacuum inside vacuumPipe";
-    $detector{"color"} = "000000";
+    $detector{"color"} = "aaffff";
     $detector{"type"} = "Polycone";
 
     $dimen = "0.0*deg 360*deg $nplanes*counts";
@@ -219,195 +155,247 @@ sub updated_rghline() {
 
     print_det(\%configuration, \%detector);
 
-   
-
-    if (0 == 1) {
-
-        # $zpos = 796;
-        # $firstVacuumIR = 0;
-        # $firstVacuumOR = 64;
-        # $pipeLength = 1829.4;
+    # old cone
+    if ($configuration{"variation"} eq "rgh_test2026_nocone") {
+        $zpos = 1013.25;
         %detector = init_det();
-        $detector{"name"} = "Airpipe";
-        $detector{"mother"} = "hdIce_mother";
-        $detector{"description"} = "Air Pipe";
-        $detector{"color"} = "aaffff";
-        $detector{"type"} = "Polycone";
-        $detector{"pos"} = "0*mm 0*mm 0*mm";
-        $detector{"dimensions"} = "0.0*deg 360*deg 4*counts 0.0*mm 0.0*mm 0.0*mm 0.0*mm 30.*mm 30*mm 25.46*mm 41.2*mm 280.71*mm 384.98*mm 384.98*mm 570*mm";
-        $detector{"material"} = "G4_AIR";
-        $detector{"style"} = 1;
-        print_det(\%configuration, \%detector);
-
-        $zpos = 643.21;
-        %detector = init_det();
-        $detector{"name"} = "Tungstentip";
-        $detector{"mother"} = "hdIce_mother";
+        $detector{"name"} = "Cone1_2";
+        $detector{"mother"} = "root";
         $detector{"description"} = "AngelaBrenna Tungsten Tip";
-        $detector{"color"} = "f69552";
+        $detector{"color"} = "551155";
         $detector{"type"} = "Cons";
         $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-        $detector{"dimensions"} = "39*mm 41.2*mm 39*mm 54.02*mm 73.21*mm 0.0*deg 360*deg";
+        $detector{"dimensions"} = "38.1*mm 61.3313*mm 38.1*mm 98.64*mm 213.25*mm 0.0*deg 360*deg";
         $detector{"material"} = "beamline_W";
         $detector{"style"} = 1;
         print_det(\%configuration, \%detector);
 
-        $zpos = 758.21;
+        $zpos = 1290.05;
         %detector = init_det();
-        $detector{"name"} = "Cone1_1";
-        $detector{"mother"} = "hdIce_mother";
+        $detector{"name"} = "Cone2";
+        $detector{"mother"} = "root";
         $detector{"description"} = "AngelaBrenna Tungsten Tip";
-        $detector{"color"} = "dd8648";
+        $detector{"color"} = "884400";
         $detector{"type"} = "Cons";
         $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-        $detector{"dimensions"} = "38.1*mm 54.02*mm 38.1*mm 61.3313*mm 41.79*mm 0.0*deg 360*deg";
+        $detector{"dimensions"} = "47.62*mm 98.64*mm 47.62*mm 109.76*mm 63.55*mm 0.0*deg 360*deg";
         $detector{"material"} = "beamline_W";
         $detector{"style"} = 1;
         print_det(\%configuration, \%detector);
-    }
 
-    $zpos = 1013.25;
-    %detector = init_det();
-    $detector{"name"} = "Cone1_2";
-    $detector{"mother"} = "root";
-    $detector{"description"} = "AngelaBrenna Tungsten Tip";
-    $detector{"color"} = "551155";
-    $detector{"type"} = "Cons";
-    $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-    $detector{"dimensions"} = "38.1*mm 61.3313*mm 38.1*mm 98.64*mm 213.25*mm 0.0*deg 360*deg";
-    $detector{"material"} = "beamline_W";
-    $detector{"style"} = 1;
-    print_det(\%configuration, \%detector);
 
-    $zpos = 1290.05;
-    %detector = init_det();
-    $detector{"name"} = "Cone2";
-    $detector{"mother"} = "root";
-    $detector{"description"} = "AngelaBrenna Tungsten Tip";
-    $detector{"color"} = "884400";
-    $detector{"type"} = "Cons";
-    $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-    $detector{"dimensions"} = "47.62*mm 98.64*mm 47.62*mm 109.76*mm 63.55*mm 0.0*deg 360*deg";
-    $detector{"material"} = "beamline_W";
-    $detector{"style"} = 1;
-    print_det(\%configuration, \%detector);
-
-    if ($configuration{"variation"} eq "rghFTOut") {
-
-        $zpos = 1797.755;
+        $zpos = 2550.0;
         %detector = init_det();
-        $detector{"name"} = "Cylinder";
+        $detector{"name"} = "TorusConnector";
         $detector{"mother"} = "root";
-        $detector{"description"} = "Moller Shield Pb pipe on beamline, NW80 flange is 2.87 inch inner diameter";
-        $detector{"color"} = "c57742";
-        $detector{"type"} = "Cons";
-        $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-        $detector{"dimensions"} = "47.63*mm 109.76*mm 47.63*mm 109.76*mm 444.155*mm 0.0*deg 360*deg";
-        $detector{"material"} = "G4_Pb";
-        $detector{"style"} = 1;
-        print_det(\%configuration, \%detector);
-
-        $zpos = 1743.2;
-        %detector = init_det();
-        $detector{"name"} = "SupportTube";
-        $detector{"mother"} = "root";
-        $detector{"description"} = "2nd Moller Shield Cone outside beam pipe  ";
-        $detector{"color"} = "ac6839";
-        $detector{"type"} = "Cons";
-        $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-        $detector{"dimensions"} = "38.1*mm 47.6*mm 38.1*mm 47.6*mm 516.7*mm 0.0*deg 360*deg";
-        $detector{"material"} = "G4_Pb";
-        $detector{"style"} = 1;
-        print_det(\%configuration, \%detector);
-
-        $zpos = 2018.765;
-        %detector = init_det();
-        $detector{"name"} = "FTPreShieldCylinder";
-        $detector{"mother"} = "root";
-        $detector{"description"} = "Shield before FT on beamline";
-        $detector{"color"} = "945931";
-        $detector{"type"} = "Cons";
-        $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-        $detector{"dimensions"} = "35.*mm 108.5*mm 35.*mm 108.5*mm 241.135*mm 0.0*deg 360*deg";
-        $detector{"material"} = "G4_Pb";
-        $detector{"style"} = 1;
-        print_det(\%configuration, \%detector);
-
-        $zpos = 2300.0;
-        %detector = init_det();
-        $detector{"name"} = "FTflangeShieldCylinder";
-        $detector{"mother"} = "root";
-        $detector{"description"} = "Shield around beam puipe flange";
+        $detector{"description"} = "Shield around Shield support before FT on beamline";
         $detector{"color"} = "999966";
         $detector{"type"} = "Cons";
         $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-        $detector{"dimensions"} = "125.4*mm 130*mm 125.4*mm 130.*mm 41.3*mm 0.0*deg 360*deg";
-        $detector{"material"} = "G4_Pb";
-        $detector{"style"} = 1;
-        print_det(\%configuration, \%detector);
-
-    }
-
-    if ($configuration{"variation"} eq "rghFTOn") {
-        $zpos = 1556.8;
-        %detector = init_det();
-        $detector{"name"} = "Cylinder";
-        $detector{"mother"} = "root";
-        $detector{"description"} = "Moller Shield Pb pipe on beamline, NW80 flange is 2.87 inch inner diameter";
-        $detector{"color"} = "c57742";
-        $detector{"type"} = "Cons";
-        $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-        $detector{"dimensions"} = "47.63*mm 109.76*mm 47.63*mm 109.76*mm 203.2*mm 0.0*deg 360*deg";
-        $detector{"material"} = "G4_Pb";
-        $detector{"style"} = 1;
-        print_det(\%configuration, \%detector);
-
-        $zpos = 1493.25;
-        %detector = init_det();
-        $detector{"name"} = "SupportTube";
-        $detector{"mother"} = "root";
-        $detector{"description"} = "2nd Moller Shield Cone outside beam pipe  ";
-        $detector{"color"} = "ac6839";
-        $detector{"type"} = "Cons";
-        $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-        $detector{"dimensions"} = "38.1*mm 47.6*mm 38.1*mm 47.6*mm 266.75*mm 0.0*deg 360*deg";
-        $detector{"material"} = "G4_Pb";
-        $detector{"style"} = 1;
-        print_det(\%configuration, \%detector);
-
-        $zpos = 2305.45;
-        %detector = init_det();
-        $detector{"name"} = "FTflangeShieldCylinder";
-        $detector{"mother"} = "root";
-        $detector{"description"} = "Shield around beam puipe flange";
-        $detector{"color"} = "999966";
-        $detector{"type"} = "Cons";
-        $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-        $detector{"dimensions"} = "125.4*mm 130*mm 125.4*mm 130.*mm 35.85*mm 0.0*deg 360*deg";
+        $detector{"dimensions"} = "97*mm 104*mm 97*mm 104*mm 101.3*mm 0.0*deg 360*deg";
         $detector{"material"} = "G4_Pb";
         $detector{"style"} = 1;
         print_det(\%configuration, \%detector);
     }
+    
+    else {
+        # =========================
+        # ELMO / RGH beamline add-on
+        # Inseriscilo dentro updated_rghline()
+        # Idealmente in un blocco:
+        # if ($configuration{"variation"} eq "rghELMO") { ... }
+        # =========================
 
-    $zpos = 2550.0;
-    %detector = init_det();
-    $detector{"name"} = "TorusConnector";
-    $detector{"mother"} = "root";
-    $detector{"description"} = "Shield around Shield support before FT on beamline";
-    $detector{"color"} = "999966";
-    $detector{"type"} = "Cons";
-    $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-    $detector{"dimensions"} = "97*mm 104*mm 97*mm 104*mm 101.3*mm 0.0*deg 360*deg";
-    $detector{"material"} = "G4_Pb";
-    $detector{"style"} = 1;
-    print_det(\%configuration, \%detector);
+        # ---------------------------------
+        # leadInsideApex (mother = fc)
+        # ---------------------------------
+        %detector = init_det();
+        $detector{"name"}        = "leadInsideApex";
+        $detector{"mother"}      = "root";
+        $detector{"description"} = "lead inside apex";
+        $detector{"color"}       = "4499ff";
+        $detector{"type"}        = "Tube";
+        $detector{"pos"}         = "0*mm 0*mm 6372*mm";
+        $detector{"rotation"}    = "0*deg 0*deg 0*deg";
+        $detector{"dimensions"}  = "140*mm 190*mm 1000*mm 0*deg 360*deg";
+        $detector{"material"}    = "G4_Pb";
+        $detector{"style"}       = 1;
+        print_det(\%configuration, \%detector);
 
 
+        # ---------------------------------
+        # ElmoTungstenCone
+        # ---------------------------------
+        %detector = init_det();
+        $detector{"name"}        = "ElmoTungstenCone";
+        $detector{"mother"}      = "root";
+        $detector{"description"} = "Tungsten moller shield - ELMO configuration";
+        $detector{"color"}       = "dd8648";
+        $detector{"type"}        = "Polycone";
+        $detector{"pos"}         = "0*mm 0*mm 0*mm";
+        $detector{"rotation"}    = "0*deg 0*deg 0*deg";
+        $detector{"dimensions"}  =
+            "0.0*deg 360*deg 4*counts "
+        . "38.1*mm 38.1*mm 47.62*mm 47.62*mm "
+        . "53.28*mm 97.3744404172839*mm 97.3744404172839*mm 105.78*mm "
+        . "553.33*mm 1249.4*mm 1249.4*mm 1351*mm";
+        $detector{"material"}    = "beamline_W";
+        $detector{"style"}       = 1;
+        print_det(\%configuration, \%detector);
 
+
+        # ---------------------------------
+        # ElmoWShield
+        # ---------------------------------
+        %detector = init_det();
+        $detector{"name"}        = "ElmoWShield";
+        $detector{"mother"}      = "root";
+        $detector{"description"} = "Tungsten Shield - ELMO configuration";
+        $detector{"color"}       = "dd8648";
+        $detector{"type"}        = "Polycone";
+        $detector{"pos"}         = "0*mm 0*mm 0*mm";
+        $detector{"rotation"}    = "0*deg 0*deg 0*deg";
+        $detector{"dimensions"}  =
+            "0.0*deg 360*deg 11*counts "
+        . "109.54*mm 109.54*mm 109.54*mm 109.54*mm 109.54*mm 100*mm 100*mm 69.85*mm 69.85*mm 95.25*mm 95.25*mm "
+        . "109.54*mm 135.5*mm 140*mm 140*mm 170*mm 170*mm 157.88*mm 157.88*mm 132*mm 132*mm 132*mm "
+        . "1480.47*mm 1807.53*mm 1807.53*mm 2268*mm 2271.91*mm 2289.90*mm 2321.97*mm 2321.97*mm 2390.47*mm 2390.47*mm 2749.24*mm";
+        $detector{"material"}    = "beamline_W";
+        $detector{"style"}       = 1;
+        print_det(\%configuration, \%detector);
+
+
+        # ---------------------------------
+        # ElmoPbCylinder1
+        # ---------------------------------
+        %detector = init_det();
+        $detector{"name"}        = "ElmoPbCylinder1";
+        $detector{"mother"}      = "root";
+        $detector{"description"} = "Lead Cylinder 1 - ELMO configuration";
+        $detector{"color"}       = "999966";
+        $detector{"type"}        = "Polycone";
+        $detector{"pos"}         = "0*mm 0*mm 0*mm";
+        $detector{"rotation"}    = "0*deg 0*deg 0*deg";
+        $detector{"dimensions"}  =
+            "0.0*deg 360*deg 2*counts "
+        . "47.62*mm 47.62*mm "
+        . "100.77*mm 100.77*mm "
+        . "1357.34*mm 1802.70*mm";
+        $detector{"material"}    = "G4_Pb";
+        $detector{"style"}       = 1;
+        print_det(\%configuration, \%detector);
+
+
+        # ---------------------------------
+        # ElmoPbCylinder2
+        # ---------------------------------
+        %detector = init_det();
+        $detector{"name"}        = "ElmoPbCylinder2";
+        $detector{"mother"}      = "root";
+        $detector{"description"} = "Lead Cylinder 2 - ELMO configuration";
+        $detector{"color"}       = "999966";
+        $detector{"type"}        = "Polycone";
+        $detector{"pos"}         = "0*mm 0*mm 0*mm";
+        $detector{"rotation"}    = "0*deg 0*deg 0*deg";
+        $detector{"dimensions"}  =
+            "0.0*deg 360*deg 2*counts "
+        . "47.62*mm 47.62*mm "
+        . "100.77*mm 100.77*mm "
+        . "1809.05*mm 2240.85*mm";
+        $detector{"material"}    = "G4_Pb";
+        $detector{"style"}       = 1;
+        print_det(\%configuration, \%detector);
+
+
+        # ---------------------------------
+        # ElmoWCylinder1
+        # ---------------------------------
+        %detector = init_det();
+        $detector{"name"}        = "ElmoWCylinder1";
+        $detector{"mother"}      = "root";
+        $detector{"description"} = "Tungsten Cylinder 1 - ELMO configuration";
+        $detector{"color"}       = "999966";
+        $detector{"type"}        = "Polycone";
+        $detector{"pos"}         = "0*mm 0*mm 0*mm";
+        $detector{"rotation"}    = "0*deg 0*deg 0*deg";
+        $detector{"dimensions"}  =
+            "0.0*deg 360*deg 2*counts "
+        . "100.78*mm 100.78*mm "
+        . "105.77*mm 105.77*mm "
+        . "1357.35*mm 1802.71*mm";
+        $detector{"material"}    = "beamline_W";
+        $detector{"style"}       = 1;
+        print_det(\%configuration, \%detector);
+
+
+        # ---------------------------------
+        # ElmoWCylinder2
+        # ---------------------------------
+        %detector = init_det();
+        $detector{"name"}        = "ElmoWCylinder2";
+        $detector{"mother"}      = "root";
+        $detector{"description"} = "Tungsten Cylinder 2 - ELMO configuration";
+        $detector{"color"}       = "999966";
+        $detector{"type"}        = "Polycone";
+        $detector{"pos"}         = "0*mm 0*mm 0*mm";
+        $detector{"rotation"}    = "0*deg 0*deg 0*deg";
+        $detector{"dimensions"}  =
+            "0.0*deg 360*deg 2*counts "
+        . "100.78*mm 100.78*mm "
+        . "105.77*mm 105.77*mm "
+        . "1809.06*mm 2240.85*mm";
+        $detector{"material"}    = "beamline_W";
+        $detector{"style"}       = 1;
+        print_det(\%configuration, \%detector);
+
+
+        # ---------------------------------
+        # ElmoSteelCase
+        # ---------------------------------
+        %detector = init_det();
+        $detector{"name"}        = "ElmoSteelCase";
+        $detector{"mother"}      = "root";
+        $detector{"description"} = "Steel Case - ELMO configuration";
+        $detector{"color"}       = "666666";
+        $detector{"type"}        = "Polycone";
+        $detector{"pos"}         = "0*mm 0*mm 0*mm";
+        $detector{"rotation"}    = "0*deg 0*deg 0*deg";
+        $detector{"dimensions"}  =
+            "0.0*deg 360*deg 2*counts "
+        . "105.78*mm 105.78*mm "
+        . "109.54*mm 109.54*mm "
+        . "1352.35*mm 2268.36*mm";
+        $detector{"material"}    = "G4_STAINLESS-STEEL";
+        $detector{"style"}       = 1;
+        print_det(\%configuration, \%detector);
+
+
+        # ---------------------------------
+        # ElmoSupportPipe
+        # ---------------------------------
+        %detector = init_det();
+        $detector{"name"}        = "ElmoSupportPipe";
+        $detector{"mother"}      = "root";
+        $detector{"description"} = "Steel support pipe - ELMO configuration";
+        $detector{"color"}       = "669966";
+        $detector{"type"}        = "Polycone";
+        $detector{"pos"}         = "0*mm 0*mm 0*mm";
+        $detector{"rotation"}    = "0*deg 0*deg 0*deg";
+        $detector{"dimensions"}  =
+            "0.0*deg 360*deg 4*counts "
+        . "38.1*mm 38.1*mm 38.1*mm 38.1*mm "
+        . "47.62*mm 47.62*mm 105.78*mm 105.78*mm "
+        . "1249.39*mm 2240.86*mm 2240.86*mm 2268.35*mm";
+        $detector{"material"}    = "G4_STAINLESS-STEEL";
+        $detector{"style"}       = 1;
+        print_det(\%configuration, \%detector);
+    }
+
+    # UPSTREAM VACUUM PIPE
     my $nplanes = 4;
-    my @rmin = (48.350, 48.350, 28.350, 28.350);
-    my @rmax = (50, 50, 30, 30);
-    my @z_upstream = (-1204.5, -311.5, -165, -162);
+    my @rmin = (48.350, 48.350, 20.001, 20.001);
+    my @rmax = (50, 50, 21.650, 21.650);
+    my @z_upstream = (-1204.5, -311.5, -242.5, -239.5);
 
     %detector = init_det();
     $detector{"name"} = "upstreamVacuumPipe";
@@ -431,7 +419,7 @@ sub updated_rghline() {
 
     # inside
     my @iradius_vac = (0.0, 0.0, 0.0, 0.0);
-    my @oradius_vac = (48.349, 48.349, 28.349, 28.34);
+    my @oradius_vac = (48.349, 48.349, 20.00, 20.00);
 
     %detector = init_det();
     $detector{"name"} = "upstreamVacuumInPipe";

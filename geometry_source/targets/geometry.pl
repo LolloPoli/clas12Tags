@@ -23,6 +23,7 @@ require "./alert.pl";  # rgl
 require "./rgd_solid.pl"; # rgd
 require "./rge.pl";  # rge
 require "./short_cryocell_targets.pl"; # rgm
+require "./rgh.pl"; # rgh
 
 sub load_target_parameters {
     $target_zpos = $parameters{"target_zpos"};
@@ -105,6 +106,9 @@ sub build_target {
         or $configuration_string eq "rge_spring2024_LD2_Pb"
         or $configuration_string eq "rge_spring2024_LD2_Sn") {
         build_rge_liquid_targets();
+    }
+    elsif ($configuration_string eq "rgh"){
+        build_rgh();
     }
     else {
         print "Error: Unknown target variation: $configuration_string\n";

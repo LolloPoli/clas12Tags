@@ -112,7 +112,7 @@ my @variations = ("default", @rga, @rgb, @rgc, @rge, @rgf, @rgl, @rgm, @rgd);
 my @runs = clas12_runs(@variations);
 my $system = $configuration{'detector_name'};
 
-my @custom_variations = ("pbtest", "ND3", "hdice", "longitudinal", "transverse", "APOLLOnd3", "bonusH2", "bonusHe", "lH2e");
+my @custom_variations = ("pbtest", "ND3", "hdice", "longitudinal", "transverse", "APOLLOnd3", "bonusH2", "bonusHe", "lH2e", "rgh");
 
 
 # list of original variations in gemc 5.11:

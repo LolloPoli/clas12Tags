@@ -2,10 +2,12 @@
 
     <option name="geometry" value="1000x600"/>
 
-    <detector name="../targets/target"            factory="TEXT"   variation="rgh"/>
-    <detector name="../targets/cad_transverse/"   factory="CAD"/>
-    <detector name="beamline"                     factory="TEXT" variation="rgh_test2026"/>
-    <!-- <detector name="../targets/targetWindows/"    factory="CAD"/> -->
+    <!-- <detector name="../targets/target" factory="TEXT" variation="transverse"/> -->
+    <detector name="../targets/target" factory="TEXT"                variation="rgh"/>
+    <detector name="../targets/cad_transverse/"                      factory="CAD"/>
+    <!-- <detector name="cad/"                      factory="CAD"  variation="rgh_test2026"/> -->
+    <detector name="beamline" factory="TEXT" variation="rgh_test2026"/>
+    <detector name="targetWindows/" factory="CAD"/>
 
     <option name="HALL_FIELD" value="Full_transsolenoid_x321_y161_z321_April2024:Symm_torus_r2501_phi16_z251_24Apr2018"/>
 
