@@ -54,6 +54,14 @@ sub build_materials {
     $mat{"components"} = "G4_C 0.745 epoxy 0.255";
     print_mat(\%configuration, \%mat);
 
+    %mat = init_mat();
+    $mat{"name"}        = "Kel-F";
+    $mat{"description"} = "Kel-F / PCTFE";
+    $mat{"density"}     = "2.1";
+    $mat{"ncomponents"} = "3";
+    $mat{"components"}  = "C 2 F 3 Cl 1";
+    print_mat(\%configuration, \%mat);
+
 }
 
 1;
